@@ -13,7 +13,7 @@ services:
       - admin_db
 
   admin_db:
-    container_name: django_admin_db
+    container_name: admin_db
     image: mysql:latest
     restart: always
     environment:
