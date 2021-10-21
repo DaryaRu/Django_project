@@ -6,7 +6,6 @@ from django.db.models.deletion import CASCADE
 class OrderItem(models.Model):
     order = models.ForeignKey(Order, related_name='order_items', on_delete=CASCADE)
     product = models.ForeignKey(Product, related_name='order_items', on_delete=CASCADE)
-    price = models.DecimalField(max_digits=10, decimal_places=2)
     quantity = models.PositiveIntegerField(default=1)
 
     def __str__(self):

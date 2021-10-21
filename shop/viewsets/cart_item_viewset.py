@@ -1,14 +1,14 @@
-from shop.models.cart import Cart
+from shop.models.cart_item import CartItem
 from rest_framework import mixins, status, viewsets
-from shop.serializers.cart_serializer import CartSerializer
+from shop.serializers.cart_item_serializer import CartItemSerializer
 from rest_framework.response import Response
 
-class CartViewSet(mixins.CreateModelMixin,
+class CartItemViewSet(mixins.CreateModelMixin,
                   mixins.DestroyModelMixin,
                   mixins.ListModelMixin,
                   viewsets.GenericViewSet):
-    queryset = Cart.objects.all()
-    serializer_class = CartSerializer
+    queryset = CartItem.objects.all()
+    serializer_class = CartItemSerializer
 
     def list(self, request, *args, **kwargs):
         queryset = self.filter_queryset(
@@ -21,3 +21,10 @@ class CartViewSet(mixins.CreateModelMixin,
 
         serializer = self.get_serializer(queryset, many=True)
         return Response(serializer.data)    
+
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save(created_by = request.user)
+        headers = self.get_success_headers(serializer.data)
+        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)        

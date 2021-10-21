@@ -5,7 +5,6 @@ from config.settings import SECRET_KEY
 from rest_framework.response import Response
 from rest_framework import viewsets
 
-
 class UserCreate(generics.CreateAPIView):
     queryset = get_user_model().objects
     serializer_class = UserSerializer

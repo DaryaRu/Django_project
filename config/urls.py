@@ -4,9 +4,9 @@ from django.urls import path, include
 from rest_framework import routers
 from shop.viewsets.category_viewset import CategoriesViewSet
 from shop.viewsets.product_viewset import ProductsViewSet
-from shop.viewsets.user_view import UserCreate, UsersViewSet
-from shop.viewsets.order_view import OrdersViewSet
-from shop.viewsets.cart_view import CartViewSet
+from shop.viewsets.user_viewset import UserCreate, UsersViewSet
+from shop.viewsets.order_viewset import OrdersViewSet
+from shop.viewsets.cart_item_viewset import CartItemViewSet
 from rest_framework_jwt.views import obtain_jwt_token
 from rest_framework_jwt.views import refresh_jwt_token
 
@@ -15,7 +15,7 @@ router.register(r'products', ProductsViewSet, basename='products')
 router.register(r'categories', CategoriesViewSet, basename='categories')
 router.register(r'users', UsersViewSet, basename='users')
 router.register(r'orders', OrdersViewSet, basename='orders')
-router.register(r'cart', CartViewSet, basename='orders')
+router.register(r'cart', CartItemViewSet, basename='cart')
 
 urlpatterns = [
     path('admin/', admin.site.urls),

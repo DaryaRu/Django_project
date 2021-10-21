@@ -1,5 +1,4 @@
 from django.db import models
-
 class Order(models.Model):
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
@@ -9,7 +8,6 @@ class Order(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     paid = models.BooleanField(default=False)
-
     class Meta:
         db_table = 'orders'
         ordering = ['-created']
@@ -18,4 +16,4 @@ class Order(models.Model):
         return 'Order {}'.format(self.id)
 
     def total_cost(self):
-        return sum(item.get_cost() for item in self.items.all())        
+        return sum(item.get_cost() for item in self.order_items.all())                
